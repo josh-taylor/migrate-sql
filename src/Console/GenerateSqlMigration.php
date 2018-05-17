@@ -26,21 +26,9 @@ class GenerateSqlMigration extends BaseCommand
 
     public function handle()
     {
-        $paths = $this->getMigrationPaths();
+        $migration = $this->migrator->resolve($name = $this->migrationName());
 
-        $files = $this->migrator->getMigrationFiles($paths);
-
-        $this->migrator->requireFiles($files);
-
-        if (! $name = $this->option('migration')) {
-            $name = $this->choice('Choose a migration', array_keys($files), 0);
-        }
-
-        $migration = $this->migrator->resolve($name);
-
-        $db = $this->migrator->resolveConnection(
-            $migration->getConnection()
-        );
+        $db = $this->migrator->resolveConnection($migration->getConnection());
 
         $method = $this->option('down') ? 'down' : 'up';
 
@@ -53,5 +41,27 @@ class GenerateSqlMigration extends BaseCommand
         foreach ($queries as $query) {
             $this->output->writeln("{$query['query']}");
         }
+    }
+
+    protected function migrationFiles()
+    {
+        $files = $this->migrator->getMigrationFiles(
+            $this->getMigrationPaths()
+        );
+
+        $this->migrator->requireFiles($files);
+
+        return $files;
+    }
+
+    protected function migrationName()
+    {
+        $files = $this->migrationFiles();
+
+        if (!$name = $this->option('migration')) {
+            return $this->choice('Choose a migration', array_keys($files), 0);
+        }
+
+        return $name;
     }
 }
