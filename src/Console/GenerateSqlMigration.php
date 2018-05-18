@@ -41,6 +41,8 @@ class GenerateSqlMigration extends BaseCommand
         foreach ($queries as $query) {
             $this->output->writeln("{$query['query']}");
         }
+
+        $this->copyQueriesToClipboard(array_pluck($queries, 'query'));
     }
 
     protected function migrationFiles()
@@ -63,5 +65,14 @@ class GenerateSqlMigration extends BaseCommand
         }
 
         return $name;
+    }
+
+    protected function copyQueriesToClipboard($queries)
+    {
+        if (`which pbcopy`) {
+            $queriesString = implode("\r\n", $queries);
+            shell_exec("echo '{$queriesString}' | pbcopy");
+            $this->info('Copied to clipboard!');
+        }
     }
 }
