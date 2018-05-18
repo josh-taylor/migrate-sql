@@ -14,6 +14,7 @@ class GenerateMigrationSqlTest extends TestCase
             '--migration' => '2018_05_16_000000_create_stub_table',
             '--path' => realpath(__DIR__.'/../../stubs/migrations'),
             '--realpath' => true,
+            '--no-interaction' => true,
         ]);
 
         $output = Artisan::output();
@@ -32,6 +33,7 @@ class GenerateMigrationSqlTest extends TestCase
             '--path' => realpath(__DIR__.'/../../stubs/migrations'),
             '--realpath' => true,
             '--down' => true,
+            '--no-interaction' => true,
         ]);
 
         $output = Artisan::output();
@@ -48,6 +50,7 @@ class GenerateMigrationSqlTest extends TestCase
         Artisan::call('migrate:sql', [
             '--path' => realpath(__DIR__.'/../../stubs/migrations'),
             '--realpath' => true,
+            '--no-interaction' => true,
         ]);
 
         $output = Artisan::output();
