@@ -9,7 +9,7 @@ This Laravel package adds a command to generate the SQL that a migration will us
 
 ## Installation
 
-This package requires PHP 7 and Laravel 5.6 or higher.
+This package requires PHP 7 and Laravel 5.5 or higher.
 
 You can install the package via composer using:
 
