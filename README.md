@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/josh-taylor/migrate-sql.svg?branch=master)](https://travis-ci.org/josh-taylor/migrate-sql)
 [![Packagist](https://img.shields.io/packagist/dt/josh-taylor/migrate-sql.svg)](https://packagist.org/packages/josh-taylor/migrate-sql)
 
+Sometimes it's not possible to run `php artisan migrate` and you have to manually run migrations.
 
 This Laravel package adds a command to generate the SQL that a migration will use. It's a bit like the `--pretend` option for `php artisan migrate` but will show migrations that have already run.
 
