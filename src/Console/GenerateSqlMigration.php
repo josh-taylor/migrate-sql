@@ -70,8 +70,8 @@ class GenerateSqlMigration extends BaseCommand
     protected function copyQueriesToClipboard($queries)
     {
         if (`which pbcopy`) {
-            $queriesString = implode("\r\n", $queries);
-            shell_exec("echo '{$queriesString}' | pbcopy");
+            $queriesString = escapeshellarg(implode("\r\n", $queries));
+            shell_exec("echo {$queriesString} | pbcopy");
             $this->info('Copied to clipboard!');
         }
     }
